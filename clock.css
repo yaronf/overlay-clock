@@ -1,0 +1,13 @@
+div#mychromeclock {
+	font-size: 120%;
+	color: blue;
+	background-color: linen;
+	border-radius:6px; /* regular */
+	opacity:0.4; /* Transparent Background 40% */
+	padding: 6px;
+}
+
+html:-webkit-full-screen div#mychromeclock{
+    background-color: red;
+}
+ 

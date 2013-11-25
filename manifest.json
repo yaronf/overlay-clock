@@ -1,0 +1,22 @@
+{
+   "content_scripts": [ {
+      "js": [ "myscript.js" ],
+      "css": [ "clock.css" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_end"
+   } ],
+   "description": "This extension displays a digital clock over the viewing page.",
+   "permissions": [
+    "storage"
+    ],
+    "icons": {
+      "128": "icon128.png",
+      "48": "icon48.png"
+   },
+   "options_page": "options.html",
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCWVzkh9khdWDpEkVm0eY6zWEaLlRWIJEpCOjUJkWl0gbo3frIFADTx9HkMkClw2NypgwFq1NcKyBFsxmpcLj0oGelo/YvRosLEzgZLd3I0/W+IGE6tfpg697PuNF0YX2CbebQsV72kf2RrRQLGIWcphHBpv88tfCwjchlr8wBTHwIDAQAB",
+   "name": "Overlay Clock",
+   "update_url": "http://clients2.google.com/service/update2/crx",
+   "manifest_version": 2,
+   "version": "0.2"
+}
