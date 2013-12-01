@@ -10,9 +10,10 @@ var fullscreen_only;
 var mil_time; // military (24-hour) clock
 
 function is_fullscreen() {
-    // var fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled
-    return document.webkitIsFullScreen;
-    // return (fullscreenEnabled?true:false);
+    // var ret = screenfull.isFullscreen;
+    var ret = (screen.width == window.outerWidth) && (screen.height == window.outerHeight);
+    console.log("fs: "+ret);
+    return ret;
 }
 
 function time_string() {
@@ -34,22 +35,22 @@ function time_string() {
     return hh+":"+mm+ampm;
 }
 
-function init_options() {
-	chrome.storage.sync.get({"fullscreen_only": false, "mil_time": true}, function(values) {
-		fullscreen_only = values["fullscreen_only"];
-		mil_time = values["mil_time"];
-	});
+function init_options(on_options_ready) {
+	chrome.storage.sync.get({"fullscreen_only": false, "mil_time": true}, on_options_ready);
 }
 
 function mychromeclockDisp(){
-    init_options();
+    init_options(options_ready);
+}
 
-    // chrome.windows.getCurrent(function(win) {console.log(win.state);});
+function options_ready(values) {
+    fullscreen_only = values["fullscreen_only"];
+    mil_time = values["mil_time"];
     var obj = document.getElementById("mychromeclock");
     if (!fullscreen_only || is_fullscreen()) {
 	    obj.innerText = time_string();
     } else {
 	obj.innerText = '';
     }
-    setTimeout("mychromeclockDisp()", 10000);
+    setTimeout(mychromeclockDisp, 10000);
 }

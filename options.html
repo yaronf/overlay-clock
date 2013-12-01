@@ -5,12 +5,16 @@
 
 <input id="fullscreen-only" type="checkbox" name="fullscreen_only"/>Full Screen Only<br>
 <input id="mil-time" type="checkbox" name="mil_time"/>24-Hour Clock<br>
+Text Color (click here): <input id="fg-color" class="color {pickerClosable:true}" value="#0000FF"><br>
+Background Color (click here): <input id="bg-color" class="color {pickerClosable:true}" value="#FAF0E6"><br>
+Background opacity (0..1): <input id="bg-opacity" type="text" value="0.4"><br>
 
 <br>
 <div id="status"></div>
 <button id="save">Save</button>
 </body>
 
+<link rel="stylesheet" href="options.css" />
 <script src="options.js"></script>
-
+<script type="text/javascript" src="jscolor/jscolor.js"></script>
 </html>
