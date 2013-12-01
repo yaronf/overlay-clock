@@ -1,8 +1,14 @@
-document.body.innerHTML = '<div id="mychromeclock" style="position:fixed;right:0;text-align:right;z-index:99999999;" onmouseover="document.getElementById('+"'mychromeclock').style.display='none'"+'" onmouseout="document.getElementById('+"'mychromeclock').style.display='block'"+'"></div>'+document.body.innerHTML;
-
-document.body.parentNode.onwebkitfullscreenchange = function(e) {
-    console.log("Entered fullscreen!");
-};
+var div = document.createElement('div');
+div.id = 'mychromeclock';
+div.style.position = "fixed";
+div.style.right = "0px";
+div.style.top = "0px";
+div.style.textAlign = "right";
+div.style.zIndex = "99999999";
+div.onmouseover = function() {document.getElementById('mychromeclock').style.display='none'};
+div.onmouseout = function() {document.getElementById('mychromeclock').style.display='block'};
+document.body.appendChild(div);
+document.getElementById('mychromeclock').innerHTML = "Hoo Haaa";
 
 mychromeclockDisp();
 
@@ -12,7 +18,7 @@ var mil_time; // military (24-hour) clock
 function is_fullscreen() {
     // var ret = screenfull.isFullscreen;
     var ret = (screen.width == window.outerWidth) && (screen.height == window.outerHeight);
-    console.log("fs: "+ret);
+    // console.log("fs: "+ret);
     return ret;
 }
 
