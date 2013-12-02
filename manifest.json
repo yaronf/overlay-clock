@@ -15,6 +15,7 @@
    },
    "options_page": "options.html",
    "name": "Overlay Clock",
+   "short_name": "OverlayClock",
    "update_url": "http://clients2.google.com/service/update2/crx",
    "manifest_version": 2,
    "version": "0.2",
