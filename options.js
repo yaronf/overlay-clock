@@ -23,12 +23,7 @@ function save_options() {
 
 // Restores options dialog state to saved value from localStorage.
 function restore_options() {
-	chrome.storage.sync.get({"fullscreen_only": false,
-		"mil_time": true,
-		"fg_color": "#0000FF",
-		"bg_color": "#FAF0E6",
-		"bg_opacity": "0.4"
-		}, function(values) {
+	chrome.storage.sync.get(document.clock_defaults, function(values) {
 		document.getElementById("fullscreen-only").checked = values["fullscreen_only"];
 		document.getElementById("mil-time").checked = values["mil_time"];
 		document.getElementById("fg-color").color.fromString(values["fg_color"]);

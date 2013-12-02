@@ -1,6 +1,6 @@
 {
    "content_scripts": [ {
-      "js": [ "screenfull.js", "clock.js" ],
+      "js": [ "defaults.js", "clock.js" ],
       "css": [ "clock.css" ],
       "matches": [ "http://*/*", "https://*/*" ],
       "run_at": "document_end"

@@ -12,9 +12,8 @@ document.body.appendChild(div);
 mychromeclockDisp();
 
 function is_fullscreen() {
-    // var ret = screenfull.isFullscreen;
+    // This is the q&d solution. The "right" way is: http://stackoverflow.com/a/20310858/955670
     var ret = (screen.width == window.outerWidth) && (screen.height == window.outerHeight);
-    // console.log("fs: "+ret);
     return ret;
 }
 
@@ -40,12 +39,7 @@ function time_string() {
 }
 
 function init_options(on_options_ready) {
-	chrome.storage.sync.get({"fullscreen_only": false,
-		"mil_time": true,
-		"fg_color": "#0000FF",
-		"bg_color": "#FAF0E6",
-		"bg_opacity": "0.4"
-	}, on_options_ready);
+	chrome.storage.sync.get(document.clock_defaults, on_options_ready);
 }
 
 function mychromeclockDisp(){
@@ -69,5 +63,5 @@ function options_ready(values) {
     } else {
 	div.style.display = 'none';
     }
-    setTimeout(mychromeclockDisp, 10000);
+    setTimeout(mychromeclockDisp, 10000); // 10s
 }
