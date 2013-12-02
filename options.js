@@ -2,8 +2,8 @@
 function save_options() {
 	var fullscreen_only = document.getElementById("fullscreen-only").checked;
 	var mil_time = document.getElementById("mil-time").checked;
-	var fg_color = document.getElementById("fg-color").value;
-	var bg_color = document.getElementById("bg-color").value;
+	var fg_color = '#' + document.getElementById("fg-color").value;
+	var bg_color = '#' + document.getElementById("bg-color").value;
 	var bg_opacity = document.getElementById("bg-opacity").value;
 	chrome.storage.sync.set({
 		"fullscreen_only": fullscreen_only,
@@ -23,11 +23,16 @@ function save_options() {
 
 // Restores options dialog state to saved value from localStorage.
 function restore_options() {
-	chrome.storage.sync.get({"fullscreen_only": false, "mil_time": true}, function(values) {
+	chrome.storage.sync.get({"fullscreen_only": false,
+		"mil_time": true,
+		"fg_color": "#0000FF",
+		"bg_color": "#FAF0E6",
+		"bg_opacity": "0.4"
+		}, function(values) {
 		document.getElementById("fullscreen-only").checked = values["fullscreen_only"];
 		document.getElementById("mil-time").checked = values["mil_time"];
-		document.getElementById("fg-color").value = values["fg_color"];
-		document.getElementById("bg-color").value = values["bg_color"];
+		document.getElementById("fg-color").color.fromString(values["fg_color"]);
+		document.getElementById("bg-color").color.fromString(values["bg_color"]);
 		document.getElementById("bg-opacity").value = values["bg_opacity"];
 	});
 }

@@ -5,7 +5,7 @@
       "matches": [ "http://*/*", "https://*/*" ],
       "run_at": "document_end"
    } ],
-   "description": "This extension displays a digital clock over the viewing page.",
+   "description": "Displays a digital clock at the corner of the page. Especially useful when going fullscreen.",
    "permissions": [
     "storage"
     ],
