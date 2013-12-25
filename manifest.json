@@ -24,7 +24,7 @@
       "38": "clock-icon38.png"
     },
     "default_title": "Overlay Clock",
-    "default_popup": "options.html"        // optional
+    "default_popup": "options.html" 
     },
    "version": "0.3",
     "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self';"
