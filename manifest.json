@@ -18,6 +18,14 @@
    "short_name": "OverlayClock",
    "update_url": "http://clients2.google.com/service/update2/crx",
    "manifest_version": 2,
-   "version": "0.2",
+   "browser_action": {
+    "default_icon": {
+      "19": "clock-icon19.png",
+      "38": "clock-icon38.png"
+    },
+    "default_title": "Overlay Clock",
+    "default_popup": "options.html"        // optional
+    },
+   "version": "0.3",
     "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self';"
 }
