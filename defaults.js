@@ -1,6 +1,10 @@
-document.clock_defaults = {"fullscreen_only": false,
-                "mil_time": true,
-                "fg_color": "#0000FF", // blue
-                "bg_color": "#FAF0E6", // linen
-                "bg_opacity": "0.4"
+document.clock_defaults = {
+	"mil_time": true,
+	"fg_color": "#B0B0B0",
+	"bg_color": "#000000",
+	"bg_opacity": "0.8",
+	"font_size": "14px",
+	"font_family": "\'Anonymous Pro Minus\', monospace",
+	"style_right": "3px",
+	"style_top": "2px"
 };

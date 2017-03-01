@@ -1,67 +1,67 @@
-var div = document.createElement('div');
-div.id = 'mychromeclock';
-div.style.position = "fixed";
-div.style.right = "0px";
-div.style.top = "0px";
-div.style.textAlign = "right";
-div.style.zIndex = "99999999";
-div.onmouseover = function() {document.getElementById('mychromeclock').style.display='none'};
-div.onmouseout = function() {document.getElementById('mychromeclock').style.display='block'};
-document.body.appendChild(div);
+var overlay_clock = document.createElement( 'div' );
 
-mychromeclockDisp();
+overlay_clock.id = 'overlay_clock_extension';
+overlay_clock.style.borderRadius = '6px';
+overlay_clock.style.display = 'block';
+overlay_clock.style.padding = '6px';
+overlay_clock.style.position = 'fixed';
+overlay_clock.style.zIndex = '9999';
 
-function is_fullscreen() {
-    // This is the q&d solution. The "right" way is: http://stackoverflow.com/a/20310858/955670
-    var ret = (screen.width == window.outerWidth) && (screen.height == window.outerHeight);
-    return ret;
-}
+document.body.appendChild( overlay_clock );
 
-var mil_time; // set by options
+// hide clock on click
+overlay_clock.onclick = function() {
+	overlay_clock.style.display = 'none';
+	setTimeout( function() { overlay_clock.style.display = 'block' }, 10000 );
+};
 
-function time_string() {
-    var now = new Date();
-    var hh = now.getHours();
-    var ampm = "";
-    if (mil_time) {
-	if( hh < 10 ){ hh = "0" + hh; }
-	} else {
-	if (hh == 0) {ampm = "a"; hh = "12"; }
-	else if (hh < 10) {ampm = "a"; hh = "0" + hh; }
-	else if (hh < 13) {ampm = "a"; }
-	else if (hh < 22) {ampm = "p"; hh = "0" + (hh - 12); }
-	else {ampm = "p"; hh = "" + (hh - 12); }
+function new_time() {
+	var now = new Date();
+	var hh = ( '0' + now.getHours() ).slice( -2 );
+	var mm = ( '0' + now.getMinutes() ).slice( -2 );
+	var apm = '';
+
+	if ( !my_overlay_clock_mil_time ) {
+		if ( hh < 13 ) {
+			apm = ' am'
+		}
+		else {
+			hh -= 12;
+			hh = ( '0' + hh ).slice( -2 );
+			apm = ' pm';
+		}
 	}
-    var mm = now.getMinutes();
-    if( mm < 10 ){ mm = "0" + mm; }
-    var ss = now.getSeconds();
-    return hh+":"+mm+ampm;
+	return hh + ':' + mm + apm;
 }
 
-function init_options(on_options_ready) {
-	chrome.storage.sync.get(document.clock_defaults, on_options_ready);
+function create_clock( values ) {
+	// use global variable to use it in new_time()
+	window.my_overlay_clock_mil_time = values[ 'mil_time' ];
+
+	my_overlay_clock_fg_color = values[ 'fg_color' ];
+	my_overlay_clock_bg_color = values[ 'bg_color' ];
+	my_overlay_clock_opacity = values[ 'bg_opacity' ];
+	my_overlay_clock_font_family = values[ 'font_family' ];
+	my_overlay_clock_font_size = values[ 'font_size' ];
+	my_overlay_clock_style_right = values[ 'style_right' ];
+	my_overlay_clock_style_top = values[ 'style_top' ];
+
+
+	overlay_clock.textContent = new_time();
+	overlay_clock.style.color = my_overlay_clock_fg_color;
+	overlay_clock.style.backgroundColor = my_overlay_clock_bg_color;
+	overlay_clock.style.opacity = my_overlay_clock_opacity;
+	overlay_clock.style.fontFamily = my_overlay_clock_font_family;
+	overlay_clock.style.fontSize = my_overlay_clock_font_size;
+	overlay_clock.style.right = my_overlay_clock_style_right;
+	overlay_clock.style.top = my_overlay_clock_style_top;
 }
 
-function mychromeclockDisp(){
-    init_options(options_ready);
+function update_time_on_clock() {
+	overlay_clock.textContent = new_time();
 }
 
-function options_ready(values) {
-    var fullscreen_only = values["fullscreen_only"];
-    mil_time = values["mil_time"];
-    var fg_color = values['fg_color'];
-    var bg_color = values['bg_color'];
-    var opacity = values['bg_opacity'];
+setInterval( update_time_on_clock, 20000 );
 
-    var div = document.getElementById("mychromeclock");
-    if (!fullscreen_only || is_fullscreen()) {
-	div.innerText = time_string();
-	div.style.color = fg_color;
-	div.style.backgroundColor = bg_color;
-	div.style.opacity = opacity;
-	div.style.display = 'block';
-    } else {
-	div.style.display = 'none';
-    }
-    setTimeout(mychromeclockDisp, 10000); // 10s
-}
+// load defaults values and transfer them to function create_clock()
+chrome.storage.sync.get( document.clock_defaults, create_clock );

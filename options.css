@@ -1,20 +1,35 @@
 html {
-	font-family: sans-serif;
-	color: #00675c;
-	background: "white";
-	border-radius:6px; /* regular */
+	min-width: 250px;
 }
 
-h1 {
-	color: #1e776d;
+body {
+	font-family: monospace;
+	color: #000000;
+	background: grey;
+	border-radius:6px;
+	font-size: 14px;
+	padding: 0 0 0 3px;
 }
 
 button {
-	color: white;
+	color: #b0b0b0;
 	border: 0px;
-	background-color: #009e8e;
+	background-color: #363636;
 	padding-top:12px;
 	padding-bottom:12px;
 	padding-right:18px;
 	padding-left:18px;
+}
+
+#bg-opacity,#font_size,#font_family,#style_right,#style_top {
+	background-color: darkgrey;
+	border: 0;
+	border-radius: 3px;
+	color: #000000;
+	font-family: 'Anonymous Pro', monospace;
+	font-size: 16px;
+}
+
+.color {
+	background-color: #292929;
 }
