@@ -12,7 +12,9 @@ document.body.appendChild( overlay_clock );
 // hide clock on click
 overlay_clock.onclick = function() {
 	overlay_clock.style.display = 'none';
-	setTimeout( function() { overlay_clock.style.display = 'block' }, 10000 );
+	setTimeout( function() {
+			overlay_clock.style.display = 'block'
+		}, 10000 );
 };
 
 function new_time() {
@@ -21,8 +23,8 @@ function new_time() {
 	var mm = ( '0' + now.getMinutes() ).slice( -2 );
 	var apm = '';
 
-	if ( !my_overlay_clock_mil_time ) {
-		if ( hh < 13 ) {
+	if( !my_overlay_clock_mil_time ) {
+		if( hh < 13 ) {
 			apm = ' am'
 		}
 		else {
@@ -34,9 +36,15 @@ function new_time() {
 	return hh + ':' + mm + apm;
 }
 
+function is_full_screen() {
+	return ( ( screen.width == window.outerWidth )
+		&& ( screen.height == window.outerHeight ) );
+}
+
 function create_clock( values ) {
 	// use global variable to use it in new_time()
 	window.my_overlay_clock_mil_time = values[ 'mil_time' ];
+	window.my_overlay_clock_full_screen_only = values[ 'full_screen_only' ];
 
 	my_overlay_clock_fg_color = values[ 'fg_color' ];
 	my_overlay_clock_bg_color = values[ 'bg_color' ];
@@ -55,10 +63,25 @@ function create_clock( values ) {
 	overlay_clock.style.fontSize = my_overlay_clock_font_size;
 	overlay_clock.style.right = my_overlay_clock_style_right;
 	overlay_clock.style.top = my_overlay_clock_style_top;
+
+	if( my_overlay_clock_full_screen_only && !is_full_screen() ) {
+			overlay_clock.style.display = 'none';
+	}
+
 }
 
 function update_time_on_clock() {
-	overlay_clock.textContent = new_time();
+	if( my_overlay_clock_full_screen_only && !is_full_screen() ) {
+		if( overlay_clock.style.display != 'none' ) {
+			overlay_clock.style.display = 'none';
+		}
+	}
+	else {
+		if( overlay_clock.style.display != 'block' ) {
+			overlay_clock.style.display = 'block';
+		}
+			overlay_clock.textContent = new_time();
+	}
 }
 
 setInterval( update_time_on_clock, 20000 );

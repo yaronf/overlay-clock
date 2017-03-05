@@ -21,7 +21,7 @@ button {
 	padding-left:18px;
 }
 
-#bg-opacity,#font_size,#font_family,#style_right,#style_top {
+#bg_opacity,#font_size,#font_family,#style_right,#style_top {
 	background-color: darkgrey;
 	border: 0;
 	border-radius: 3px;

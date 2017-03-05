@@ -1,5 +1,6 @@
 document.clock_defaults = {
 	"mil_time": true,
+	"full_screen_only": false,
 	"fg_color": "#B0B0B0",
 	"bg_color": "#000000",
 	"bg_opacity": "0.8",
