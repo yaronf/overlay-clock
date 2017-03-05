@@ -1,24 +1,30 @@
+<!DOCTYPE html>
 <html>
-<head><title>Overlay Clock Options</title></head>
+<head>
+	<title>Overlay Clock Options</title>
+	<meta charset="utf-8">
+</head>
 
 <body>
-<div id="content">
-<h1>Overlay Clock Options</h1>
-<input id="fullscreen-only" type="checkbox" name="fullscreen_only"/>Full Screen Only<br>
-<input id="mil-time" type="checkbox" name="mil_time"/>24-Hour Clock<br>
-<br>
-Text Color: <input id="fg-color" class="color {pickerClosable:true, hash:true}"><br>
-Background Color: <input id="bg-color" class="color {pickerClosable:true, hash:true}"><br>
-Background Opacity (0..1): <input id="bg-opacity" type="text"><br>
+	<div id="content">
+	<h3>Overlay Clock Options</h3>
+	<input id="mil_time" type="checkbox" name="mil_time"/>24-Hour Clock<br><br>
+	<input id="full_screen_only" type="checkbox" name="full_screen_only"/>Full screen only<br><br>
+	Text Color: <input id="fg_color" class="color" type="color"><br><br>
+	Background Color: <input id="bg_color" class="color" type="color"><br><br>
+	Background Opacity (0..1): <input id="bg_opacity" placeholder="0.8" type="text"><br><br>
+	Font Size: <input id="font_size" placeholder="14px" type="text"><br><br>
+	Font Family: <input id="font_family" placeholder="'Anonymous Pro Minus', monospace" type="text"><br><br>
+	Margin from right side: <input id="style_right" placeholder="3px" type="text"><br><br>
+	Margin from top: <input id="style_top" placeholder="2px" type="text""><br><br>
 
-<br>
-<div id="status"></div>
-<button id="save">Save</button>
-</div>
+	<br>
+	<div id="status"></div>
+		<button id="save">Save</button>
+	</div>
 </body>
 
 <link rel="stylesheet" href="options.css" />
 <script src="defaults.js"></script>
 <script src="options.js"></script>
-<script type="text/javascript" src="jscolor/jscolor.js"></script>
 </html>
