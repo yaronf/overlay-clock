@@ -5,7 +5,7 @@ overlay_clock.style.borderRadius = '6px';
 overlay_clock.style.display = 'block';
 overlay_clock.style.padding = '6px';
 overlay_clock.style.position = 'fixed';
-overlay_clock.style.zIndex = '9999';
+overlay_clock.style.zIndex = '10000099';
 
 document.body.appendChild( overlay_clock );
 
