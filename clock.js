@@ -24,18 +24,27 @@ function new_time() {
 	var apm = '';
 
 	if( !my_overlay_clock_mil_time ) {
-		if( hh < 13 ) {
+		if( hh < 12 ) {
 			apm = ' am'
 		}
 		else {
 			hh -= 12;
-			hh = ( '0' + hh ).slice( -2 );
 			apm = ' pm';
 		}
+	    hh = ( '0' + hh ).slice( -2 );
+	    if (hh == '00') {
+		hh = '12';
+	    }
 	}
 	return hh + ':' + mm + apm;
 }
 
+function new_date() {
+    var now = new Date();
+    var d = now.toLocaleDateString();
+    return d;
+}
+    
 function is_full_screen() {
 	return ( ( screen.width == window.outerWidth )
 		&& ( screen.height == window.outerHeight ) );
@@ -55,7 +64,8 @@ function create_clock( values ) {
 	my_overlay_clock_style_top = values[ 'style_top' ];
 
 
-	overlay_clock.textContent = new_time();
+        overlay_clock.textContent = new_time();
+        overlay_clock.title = new_date();
 	overlay_clock.style.color = my_overlay_clock_fg_color;
 	overlay_clock.style.backgroundColor = my_overlay_clock_bg_color;
 	overlay_clock.style.opacity = my_overlay_clock_opacity;
@@ -80,7 +90,8 @@ function update_time_on_clock() {
 		if( overlay_clock.style.display != 'block' ) {
 			overlay_clock.style.display = 'block';
 		}
-			overlay_clock.textContent = new_time();
+	    overlay_clock.textContent = new_time();
+	    overlay_clock.title = new_date();
 	}
 }
 
