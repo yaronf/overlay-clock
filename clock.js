@@ -10,7 +10,7 @@ overlay_clock.style.zIndex = '10000099';
 // global variable for change_clock_appearance_on_resize()
 var default_font_size_of_overlay_clock;
 
-document.body.appendChild( overlay_clock );
+window.addEventListener('load', function() { document.body.appendChild(overlay_clock); }, false);
 window.addEventListener('resize', change_clock_appearance_on_resize, false);
 
 // hide clock on click
