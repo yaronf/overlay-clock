@@ -7,7 +7,11 @@ overlay_clock.style.padding = '6px';
 overlay_clock.style.position = 'fixed';
 overlay_clock.style.zIndex = '10000099';
 
+// global variable for change_clock_appearance_on_resize()
+var default_font_size_of_overlay_clock;
+
 document.body.appendChild( overlay_clock );
+window.addEventListener('resize', change_clock_appearance_on_resize, false);
 
 // hide clock on click
 overlay_clock.onclick = function() {
@@ -44,11 +48,57 @@ function new_date() {
     var d = now.toLocaleDateString();
     return d;
 }
-    
+
 function is_full_screen() {
 	return ( ( screen.width == window.outerWidth )
 		&& ( screen.height == window.outerHeight ) );
 }
+
+// has hardcoded 'padding' and 'borderRadius' values
+function change_clock_appearance_on_resize() {
+	switch( window.devicePixelRatio ) {
+	case 1.25:
+		// just default values
+		overlay_clock.style.padding = '6px';
+		overlay_clock.style.borderRadius = '6px';
+		overlay_clock.style.fontSize = default_font_size_of_overlay_clock;
+		break;
+	case 1.50:
+		overlay_clock.style.padding = '4px';
+		overlay_clock.style.borderRadius = '5px';
+		overlay_clock.style.fontSize = subtract_from_font_size(2) + 'px';
+		break;
+	case 1.75:
+		overlay_clock.style.padding = '2px';
+		overlay_clock.style.borderRadius = '4px';
+		overlay_clock.style.fontSize = subtract_from_font_size(4) + 'px';
+		break;
+	case 2.00:
+	case 2.50:
+	case 3.00:
+		overlay_clock.style.padding = '1px';
+		overlay_clock.style.borderRadius = '2px';
+		overlay_clock.style.fontSize = subtract_from_font_size(4) + 'px';
+		break;
+	default:
+		// as in 1.25
+		overlay_clock.style.padding = '6px';
+		overlay_clock.style.fontSize = default_font_size_of_overlay_clock;
+	}
+}
+
+function subtract_from_font_size(how_much_subtract) {
+	// delete 'px' from value
+	font_size =	default_font_size_of_overlay_clock.slice(0, -2);
+	if( font_size - how_much_subtract >= 6 ) {
+		font_size -= how_much_subtract;
+	}
+	else {
+		font_size = 6;
+	}
+	return font_size
+}
+
 
 function create_clock( values ) {
 	// use global variable to use it in new_time()
@@ -73,6 +123,9 @@ function create_clock( values ) {
 	overlay_clock.style.fontSize = my_overlay_clock_font_size;
 	overlay_clock.style.right = my_overlay_clock_style_right;
 	overlay_clock.style.top = my_overlay_clock_style_top;
+
+	// global variable for change_clock_appearance_on_resize()
+	default_font_size_of_overlay_clock = overlay_clock.style.fontSize;
 
 	if( my_overlay_clock_full_screen_only && !is_full_screen() ) {
 			overlay_clock.style.display = 'none';
