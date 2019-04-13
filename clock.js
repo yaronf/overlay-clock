@@ -83,6 +83,7 @@ function change_clock_appearance_on_resize() {
 	default:
 		// as in 1.25
 		overlay_clock.style.padding = '6px';
+		overlay_clock.style.borderRadius = '6px';
 		overlay_clock.style.fontSize = default_font_size_of_overlay_clock;
 	}
 }
