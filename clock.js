@@ -56,35 +56,27 @@ function is_full_screen() {
 
 // has hardcoded 'padding' and 'borderRadius' values
 function change_clock_appearance_on_resize() {
-	switch( window.devicePixelRatio ) {
-	case 1.25:
-		// just default values
+	// or browser.tabs.getZoom()
+	dpr = window.devicePixelRatio
+	if     ( dpr <= 1.25 ) {
 		overlay_clock.style.padding = '6px';
 		overlay_clock.style.borderRadius = '6px';
 		overlay_clock.style.fontSize = default_font_size_of_overlay_clock;
-		break;
-	case 1.50:
-		overlay_clock.style.padding = '4px';
+	}
+	else if( dpr <= 1.50 ) {
+		overlay_clock.style.padding = '5px';
 		overlay_clock.style.borderRadius = '5px';
-		overlay_clock.style.fontSize = subtract_from_font_size(2) + 'px';
-		break;
-	case 1.75:
-		overlay_clock.style.padding = '2px';
+		overlay_clock.style.fontSize = subtract_from_font_size( 1 ) + 'px';
+	}
+	else if( dpr <= 1.75 ) {
+		overlay_clock.style.padding = '3px';
 		overlay_clock.style.borderRadius = '4px';
-		overlay_clock.style.fontSize = subtract_from_font_size(4) + 'px';
-		break;
-	case 2.00:
-	case 2.50:
-	case 3.00:
-		overlay_clock.style.padding = '1px';
+		overlay_clock.style.fontSize = subtract_from_font_size( 4 ) + 'px';
+	}
+	else if( dpr >  1.75 ) {
+		overlay_clock.style.padding = '2px';
 		overlay_clock.style.borderRadius = '2px';
-		overlay_clock.style.fontSize = subtract_from_font_size(4) + 'px';
-		break;
-	default:
-		// as in 1.25
-		overlay_clock.style.padding = '6px';
-		overlay_clock.style.borderRadius = '6px';
-		overlay_clock.style.fontSize = default_font_size_of_overlay_clock;
+		overlay_clock.style.fontSize = subtract_from_font_size( 4 ) + 'px';
 	}
 }
 
