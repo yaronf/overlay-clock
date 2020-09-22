@@ -46,3 +46,70 @@ function restore_options() {
 
 document.addEventListener( 'DOMContentLoaded', restore_options );
 document.querySelector( '#save' ).addEventListener( 'click', save_options );
+
+
+let clock_visibility = document.getElementById("display_clock");
+set_state_of_hide_clock_checkbox();
+function set_state_of_hide_clock_checkbox() {
+	browser.tabs.query({
+		currentWindow: true,
+		active: true
+	})
+	.then( function( tab ) {
+		const sended_message = browser.tabs.sendMessage(
+			tab[0].id,
+			{ visibility: "what" }
+		)
+		sended_message.then( ( response ) => {
+			if( response.response == "hidden" ) {
+				clock_visibility.checked = true;
+			}
+			if( response.response == "shown" ) {
+				clock_visibility.checked = false;
+			}
+		})
+		.catch( function( error ) {
+			console.error( `overlay_clock switch_checkbox send_message error: ${error}` );
+		})
+	})
+	.catch( function ( error ) {
+		console.error( `overlay_clock switch_checkbox tab_query error: ${error}` );
+	});
+}
+
+clock_visibility.addEventListener( 'change', change_visibility );
+function change_visibility() {
+	// console.error( "clock_visibility.checked = ", clock_visibility.checked );
+	browser.tabs.query({
+		// without this will try to do it for all tabs (even without clock (e. g. tab is not loaded)):
+		active: true,
+		currentWindow: true
+	})
+	.then( send_message_to_tabs )
+	.catch( function (error) {
+		console.error( `overlay_clock change_visibility tab_query error: ${error}` );
+	});
+}
+
+function send_message_to_tabs( tabs ) {
+	if( clock_visibility.checked == false ) {
+		// for( let tab of tabs ) {
+			browser.tabs.sendMessage(
+				// tab.id,
+				tabs[0].id,
+				{ visibility: "show" }
+			)
+			.catch()
+		// }
+	}
+	if( clock_visibility.checked == true ) {
+		// for( let tab of tabs ) {
+			browser.tabs.sendMessage(
+				// tab.id,
+				tabs[0].id,
+				{ visibility: "hide" }
+			)
+			.catch()
+		// }
+	}
+}
