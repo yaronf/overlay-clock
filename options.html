@@ -10,7 +10,9 @@
 	<h3>Overlay Clock Options</h3>
 	<input id="mil_time" type="checkbox" name="mil_time"/>24-Hour Clock<br><br>
 	<input id="full_screen_only" type="checkbox" name="full_screen_only"/>Full screen only<br><br>
-	<input id="display_clock" type="checkbox" />Hide clock<br><br>
+	<label class="hide_clock_switch" for="hide_clock_checkbox">
+		<input type="checkbox" id="hide_clock_checkbox" /> <div id="hide_clock_slider"></div> <span id="hide_clock_text"></span>
+	</label> <br><br>
 	Text Color: <input id="fg_color" class="color" type="color"><br><br>
 	Background Color: <input id="bg_color" class="color" type="color"><br><br>
 	Background Opacity (0..1): <input id="bg_opacity" placeholder="0.8" type="text"><br><br>

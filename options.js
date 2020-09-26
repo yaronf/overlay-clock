@@ -48,7 +48,7 @@ document.addEventListener( 'DOMContentLoaded', restore_options );
 document.querySelector( '#save' ).addEventListener( 'click', save_options );
 
 
-let clock_visibility = document.getElementById("display_clock");
+let clock_visibility = document.getElementById("hide_clock_checkbox");
 set_state_of_hide_clock_checkbox();
 function set_state_of_hide_clock_checkbox() {
 	browser.tabs.query({
