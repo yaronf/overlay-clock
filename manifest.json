@@ -9,7 +9,7 @@
    },
    "content_scripts": [ {
       "js": [ "defaults.js", "clock.js" ],
-      "matches": [ "http://*/*", "https://*/*" ],
+      "matches": [ "http://*/*", "https://*/*", "file://*/*" ],
       "run_at": "document_end"
    } ],
    "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self';",
