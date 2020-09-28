@@ -7,6 +7,11 @@
       "default_popup": "options.html",
       "default_title": "Overlay Clock"
    },
+   "browser_specific_settings": {
+      "gecko": {
+         "id": "{96823de3-bcbd-4dd7-b810-858aa67edb66}"
+      }
+   },
    "content_scripts": [ {
       "js": [ "defaults.js", "clock.js" ],
       "matches": [ "http://*/*", "https://*/*" ],
@@ -20,9 +25,11 @@
    },
    "manifest_version": 2,
    "name": "Overlay Clock",
-   "options_page": "options.html",
+   "options_ui": {
+	   "page": "options.html"
+   },
    "permissions": [ "storage" ],
    "short_name": "OverlayClock",
    "update_url": "http://clients2.google.com/service/update2/crx",
-   "version": "0.6"
+   "version": "0.7"
 }
