@@ -33,3 +33,62 @@ button {
 .color {
 	background-color: #292929;
 }
+
+.hide_clock_switch {
+	display: inline-block;
+	height: 16px;
+	position: relative;
+	width: 70px;
+	left: 1rem;
+}
+.hide_clock_switch input {
+	display: none;
+}
+
+#hide_clock_slider {
+	/* not the button */
+	background-color: #464646;
+	/*border-radius: 25%;*/
+	border-radius: 90%;
+	cursor: pointer;
+	position: absolute;
+	transition: all .3s ease;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+}
+#hide_clock_slider:before {
+	/* this is the button */
+	background-color: #000090;
+	border-radius: 50%;
+	content: "";
+	bottom: -2px;
+	left: 24px;
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	transition: all .3s ease;
+}
+input[id="hide_clock_checkbox"]:checked + #hide_clock_slider {
+	background-color: #606060;
+	left: 19px;
+	right: 21px;
+}
+input[id="hide_clock_checkbox"]:checked + #hide_clock_slider:before {
+	/* this is the button */
+	left: 5px;
+}
+
+#hide_clock_text {
+	white-space: nowrap;
+	left: calc(70px + 16px);
+	/* position: relative */
+	position: absolute;
+}
+.hide_clock_switch #hide_clock_checkbox         + #hide_clock_slider + #hide_clock_text:after  {
+	content: "Hide clock";
+}
+.hide_clock_switch #hide_clock_checkbox:checked + #hide_clock_slider + #hide_clock_text:after  {
+	content: "Show clock";
+}

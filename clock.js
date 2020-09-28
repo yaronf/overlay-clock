@@ -145,3 +145,20 @@ setInterval( update_time_on_clock, 20000 );
 
 // load defaults values and transfer them to function create_clock()
 chrome.storage.sync.get( document.clock_defaults, create_clock );
+
+browser.runtime.onMessage.addListener( (request, sender, sendResponse) => {
+	if( request.visibility == "show" ) {
+		overlay_clock.style.display = 'block';
+	}
+	if( request.visibility == "hide" ) {
+		overlay_clock.style.display = 'none';
+	}
+	if( request.visibility == "what" ) {
+		if( overlay_clock.style.display == 'none' ) {
+			return Promise.resolve( { response: "hidden" } );
+		}
+		if( overlay_clock.style.display == 'block' ) {
+			return Promise.resolve( { response: "shown" } );
+		}
+	}
+} );
