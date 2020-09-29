@@ -1,7 +1,7 @@
 overlay-clock
 =============
 
-A small Chrome extension that displays an overlay clock.
+A small browser extension that displays an overlay clock.
 
 Displays a digital clock on a web page. Colors and location are configurable. Click on the clock to hide it for a few seconds, hover to display date.
 
