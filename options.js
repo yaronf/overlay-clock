@@ -9,6 +9,7 @@ function save_options() {
 	var font_family = document.getElementById( "font_family" ).value;
 	var style_right = document.getElementById( "style_right" ).value;
 	var style_top = document.getElementById( "style_top" ).value;
+	var z_index = document.getElementById( "z_index" ).value;
 
 	chrome.storage.sync.set( {
 		"mil_time": mil_time,
@@ -19,7 +20,8 @@ function save_options() {
 		"font_size": font_size,
 		"font_family": font_family,
 		"style_right": style_right,
-		"style_top": style_top
+		"style_top": style_top,
+		"z_index": z_index
 	} );
 
 	// Update status to let user know options were saved.
@@ -41,6 +43,7 @@ function restore_options() {
 		document.getElementById( "font_family" ).value = values[ "font_family" ];
 		document.getElementById( "style_right" ).value = values[ "style_right" ];
 		document.getElementById( "style_top" ).value = values[ "style_top" ];
+		document.getElementById( "z_index" ).value = values[ "z_index" ];
 	});
 }
 

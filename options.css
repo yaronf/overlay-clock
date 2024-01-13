@@ -21,7 +21,7 @@ button {
 	padding-left:18px;
 }
 
-#bg_opacity,#font_size,#font_family,#style_right,#style_top {
+#bg_opacity,#font_size,#font_family,#style_right,#style_top,#z_index {
 	background-color: darkgrey;
 	border: 0;
 	border-radius: 3px;
@@ -32,6 +32,13 @@ button {
 
 .color {
 	background-color: #292929;
+}
+
+/* Disable arrow buttons on the right side of input field.
+ * So that user could only redact text there, not to do it via mouse scroll.
+ */
+#z_index {
+	appearance: textfield;
 }
 
 .hide_clock_switch {

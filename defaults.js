@@ -7,5 +7,6 @@ document.clock_defaults = {
 	"font_size": "14px",
 	"font_family": "\'Anonymous Pro Minus\', monospace",
 	"style_right": "3px",
-	"style_top": "2px"
+	"style_top": "2px",
+	"z_index": "10000099"
 };

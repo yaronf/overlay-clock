@@ -5,7 +5,6 @@ overlay_clock.style.borderRadius = '6px';
 overlay_clock.style.display = 'block';
 overlay_clock.style.padding = '6px';
 overlay_clock.style.position = 'fixed';
-overlay_clock.style.zIndex = '10000099';
 
 // global variable for change_clock_appearance_on_resize()
 var default_font_size_of_overlay_clock;
@@ -105,6 +104,9 @@ function create_clock( values ) {
 	my_overlay_clock_font_size = values[ 'font_size' ];
 	my_overlay_clock_style_right = values[ 'style_right' ];
 	my_overlay_clock_style_top = values[ 'style_top' ];
+	// yeah, will be only one z-index for every page, sorry
+	let my_overlay_clock_z_index = values[ 'z_index' ];
+
 
 
         overlay_clock.textContent = new_time();
@@ -116,6 +118,7 @@ function create_clock( values ) {
 	overlay_clock.style.fontSize = my_overlay_clock_font_size;
 	overlay_clock.style.right = my_overlay_clock_style_right;
 	overlay_clock.style.top = my_overlay_clock_style_top;
+	overlay_clock.style.zIndex = my_overlay_clock_z_index;
 
 	// global variable for change_clock_appearance_on_resize()
 	default_font_size_of_overlay_clock = overlay_clock.style.fontSize;
