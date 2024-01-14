@@ -1,5 +1,10 @@
 html {
-	min-width: 250px;
+	--min-page-width: 440px;
+	--max-page-width: 440px;
+	--min-page-height: 280px;
+	--max-page-height: 300px;
+	min-width: var( --min-page-width );
+	max-width: var( --max-page-width );
 }
 
 body {
@@ -11,14 +16,34 @@ body {
 	padding: 0 0 0 3px;
 }
 
-button {
+/* Increase visibility of placeholder text */
+::placeholder {
+	opacity: 0.8;
+}
+
+button, #add_domain, input[class="delete_domain"] {
 	color: #b0b0b0;
 	border: 0px;
 	background-color: #363636;
-	padding-top:12px;
-	padding-bottom:12px;
-	padding-right:18px;
-	padding-left:18px;
+}
+button {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	padding-right: 2ex;
+	padding-left: 2ex;
+}
+
+.buttons_container {
+	position: relative;
+	/* Some space from above fields */
+	padding-top: 1em;
+}
+.buttons_horizon {
+	position: absolute;
+	left: 6rem; /* hardcoded for "save" word */
+	/* The same size as above class */
+	padding-top: 1em;
+	top: 0%;
 }
 
 #bg_opacity,#font_size,#font_family,#style_right,#style_top,#z_index {
@@ -39,6 +64,51 @@ button {
  */
 #z_index {
 	appearance: textfield;
+}
+
+#page_1 {
+	max-height: var( --max-page-height );
+}
+#page_2 {
+	/* Hide domains page by default */
+	display: none;
+	max-height: var( --max-page-height );
+}
+
+#domains_container {
+	overflow-y: scroll;
+	border: 1px;
+	min-height: var( --min-page-height );
+	max-height: var( --min-page-height );
+}
+.domains {
+	background-color: darkgrey;
+	border: 1px;
+	color: #000000;
+	font-family: monospace;
+	font-size: 16px;
+}
+.domain_element {
+	padding-top: 10px;
+	padding-left: 2px;
+}
+
+/* Default values for opening settings page */
+#page_1_button {
+	display: block;
+}
+#page_2_button {
+	display: none;
+}
+
+/* Move apart sticked together input fields
+ * (those ones, that have only 1 br between them here)
+ */
+#bg_opacity {
+	margin-top: 0.5em;
+}
+#font_size, #style_right {
+	margin-bottom: 0.5em;
 }
 
 .hide_clock_switch {

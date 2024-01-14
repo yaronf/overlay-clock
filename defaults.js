@@ -8,5 +8,6 @@ document.clock_defaults = {
 	"font_family": "\'Anonymous Pro Minus\', monospace",
 	"style_right": "3px",
 	"style_top": "2px",
-	"z_index": "10000099"
+	"z_index": "10000099",
+	"domains_array": []
 };

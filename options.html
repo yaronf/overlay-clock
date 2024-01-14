@@ -8,26 +8,51 @@
 <body>
 	<div id="content">
 	<h3>Overlay Clock Options</h3>
-	<input id="mil_time" type="checkbox" name="mil_time"/>24-Hour Clock<br><br>
-	<input id="full_screen_only" type="checkbox" name="full_screen_only"/>Full screen only<br><br>
+	<div id="page_1">
+	<input id="mil_time" type="checkbox" name="mil_time"/>24-Hour Clock<br>
+	<input id="full_screen_only" type="checkbox" name="full_screen_only"/>Full screen only
 	<label class="hide_clock_switch" for="hide_clock_checkbox">
 		<input type="checkbox" id="hide_clock_checkbox" /> <div id="hide_clock_slider"></div> <span id="hide_clock_text"></span>
 	</label> <br><br>
-	Text Color: <input id="fg_color" class="color" type="color"><br><br>
-	Background Color: <input id="bg_color" class="color" type="color"><br><br>
-	Background Opacity (0..1): <input id="bg_opacity" placeholder="0.8" type="text"><br><br>
-	Font Size: <input id="font_size" placeholder="14px" type="text"><br><br>
+	Text Color: <input id="fg_color" class="color" type="color">
+	Background Color: <input id="bg_color" class="color" type="color"><br>
+	Background Opacity: <input id="bg_opacity" placeholder="0.8" type="text" title="[0..1]"><br><br>
+	Font Size: <input id="font_size" placeholder="14px" type="text"><br>
 	Font Family: <input id="font_family" placeholder="'Anonymous Pro Minus', monospace" type="text" title="Font names with space must be enclosed in quotes"><br><br>
 	<!-- yes, you can use '%'s and whatever css could use -->
-	Margin from right side: <input id="style_right" placeholder="3px" type="text" title="you can also use '%' and other units of measurement, not only 'px'"><br><br>
+	Margin from right side: <input id="style_right" placeholder="3px" type="text" title="you can also use '%' and other units of measurement, not only 'px'"><br>
 	Margin from top: <input id="style_top" placeholder="2px" type="text"><br><br>
 	Z-index: <input id="z_index" type="number" placeholder="10000099" title="The bigger the number, the higher place above other elements it will take"><br><br>
+	</div id="page_1">
 
+
+	<div id="page_2">
+		<div id="domains_container">
+			<div class="domain_element">
+				<input class="domains" type="text" placeholder="www.domain.name"
+					title="Tap at 'Save' button after adding domain">
+				<input id="add_domain" type="button" title="Add this domain to list"
+					value="✝">
+			</div class="domain_element">
+		</div id="domains_container">
+		<br>
+	</div id="page_2">
 
 	<br>
 	<div id="status"></div>
+
+	<div class="buttons_container">
 		<button id="save">Save</button>
-	</div>
+
+		<div id="page_1_button" class="buttons_horizon">
+			<button id="switch_to_page_2" type="button">Page 2</button>
+		</div>
+		<div id="page_2_button" class="buttons_horizon">
+			<button id="switch_to_page_1" type="button">Page 1</button>
+		</div>
+	</div class="buttons_container">
+
+	</div id="content">
 </body>
 
 <link rel="stylesheet" href="options.css" />

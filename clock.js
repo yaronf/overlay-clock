@@ -106,7 +106,9 @@ function create_clock( values ) {
 	my_overlay_clock_style_top = values[ 'style_top' ];
 	// yeah, will be only one z-index for every page, sorry
 	let my_overlay_clock_z_index = values[ 'z_index' ];
-
+	let my_overlay_clock_domains = values[ 'domains_array' ];
+	// console.log( "create_clock: domains[0] = " + my_overlay_clock_domains[0] );
+	check_is_page_in_domains_list( my_overlay_clock_domains );
 
 
         overlay_clock.textContent = new_time();
@@ -126,7 +128,6 @@ function create_clock( values ) {
 	if( my_overlay_clock_full_screen_only && !is_full_screen() ) {
 			overlay_clock.style.display = 'none';
 	}
-
 }
 
 function update_time_on_clock() {
@@ -165,3 +166,23 @@ browser.runtime.onMessage.addListener( (request, sender, sendResponse) => {
 		}
 	}
 } );
+
+function check_is_page_in_domains_list( domains ) {
+	// if( domains == "undefined" ) {
+	// 	console.log( "check_is_page_in_domains_list: domains are undefined" );
+	// 	return;
+	// }
+	// console.log( "check_is_page_in_domains_list: " +
+	// "doc.loc.host = " + document.location.hostname );
+	if (domains.length > 0 ) {
+		let host = document.location.hostname;
+		// yeah, no check for values
+		for( let index = 0; index < domains.length; index++ ) {
+			if( domains[ index ] == host ) {
+				// not deleting it
+				overlay_clock.style.display = 'none';
+				break;
+			}
+		}
+	}
+}
