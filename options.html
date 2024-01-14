@@ -8,7 +8,7 @@
 <body>
 	<div id="content">
 	<h3>Overlay Clock Options</h3>
-	<div id="page_1">
+	<div id="page_general_settings">
 	<input id="mil_time" type="checkbox" name="mil_time"/>24-Hour Clock<br>
 	<input id="full_screen_only" type="checkbox" name="full_screen_only"/>Full screen only
 	<label class="hide_clock_switch" for="hide_clock_checkbox">
@@ -23,10 +23,11 @@
 	Margin from right side: <input id="style_right" placeholder="3px" type="text" title="you can also use '%' and other units of measurement, not only 'px'"><br>
 	Margin from top: <input id="style_top" placeholder="2px" type="text"><br><br>
 	Z-index: <input id="z_index" type="number" placeholder="10000099" title="The bigger the number, the higher place above other elements it will take"><br><br>
-	</div id="page_1">
+	</div id="page_general_settings">
 
 
-	<div id="page_2">
+	<div id="page_domains_list">
+		<div><label>Add domains to this list, to hide clock there</label></div>
 		<div id="domains_container">
 			<div class="domain_element">
 				<input class="domains" type="text" placeholder="www.domain.name"
@@ -36,7 +37,7 @@
 			</div class="domain_element">
 		</div id="domains_container">
 		<br>
-	</div id="page_2">
+	</div id="page_domains_list">
 
 	<br>
 	<div id="status"></div>
@@ -44,11 +45,11 @@
 	<div class="buttons_container">
 		<button id="save">Save</button>
 
-		<div id="page_1_button" class="buttons_horizon">
-			<button id="switch_to_page_2" type="button">Page 2</button>
+		<div id="page_general_settings_button" class="buttons_horizon">
+			<button id="switch_to_page_domains_list" type="button">Domains</button>
 		</div>
-		<div id="page_2_button" class="buttons_horizon">
-			<button id="switch_to_page_1" type="button">Page 1</button>
+		<div id="page_domains_list_button" class="buttons_horizon">
+			<button id="switch_to_page_general_settings" type="button">General Settings</button>
 		</div>
 	</div class="buttons_container">
 

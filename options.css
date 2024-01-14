@@ -66,10 +66,10 @@ button {
 	appearance: textfield;
 }
 
-#page_1 {
+#page_general_settings {
 	max-height: var( --max-page-height );
 }
-#page_2 {
+#page_domains_list {
 	/* Hide domains page by default */
 	display: none;
 	max-height: var( --max-page-height );
@@ -94,10 +94,10 @@ button {
 }
 
 /* Default values for opening settings page */
-#page_1_button {
+#page_general_settings_button {
 	display: block;
 }
-#page_2_button {
+#page_domains_list_button {
 	display: none;
 }
 

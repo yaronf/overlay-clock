@@ -64,14 +64,14 @@ document.getElementById( "add_domain" ).addEventListener( 'click', function() {
 	add_this_domain( this );
 });
 
-document.getElementById( "switch_to_page_1" ).addEventListener( 'click', function() {
+document.getElementById( "switch_to_page_general_settings" ).addEventListener( 'click', function() {
 	// to hide, to show
-	switch_options_page( "page_2", "page_1" );
-	switch_options_page( "page_2_button", "page_1_button" );
+	switch_options_page( "page_domains_list", "page_general_settings" );
+	switch_options_page( "page_domains_list_button", "page_general_settings_button" );
 	} );
-document.getElementById( "switch_to_page_2" ).addEventListener( 'click', function() {
-	switch_options_page( "page_1", "page_2" );
-	switch_options_page( "page_1_button", "page_2_button" );
+document.getElementById( "switch_to_page_domains_list" ).addEventListener( 'click', function() {
+	switch_options_page( "page_general_settings", "page_domains_list" );
+	switch_options_page( "page_general_settings_button", "page_domains_list_button" );
 	} );
 
 // helper function
@@ -166,7 +166,7 @@ function switch_options_page( to_hide, to_show ) {
 }
 
 
-// For each saved domain create an div with it and add to page_2.
+// For each saved domain create an div with it and add to page_domains_list.
 function recreate_domains_list_in_html( domains ) {
 	domains.forEach( function( value ) {
 		domains_container.appendChild( create_domain_element_div( value ) );
