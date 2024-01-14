@@ -165,6 +165,9 @@ browser.runtime.onMessage.addListener( (request, sender, sendResponse) => {
 			return Promise.resolve( { response: "shown" } );
 		}
 	}
+	if( request.recreate == "true" ) {
+		chrome.storage.sync.get(document.clock_defaults, create_clock);
+	}
 } );
 
 function check_is_page_in_domains_list( domains ) {

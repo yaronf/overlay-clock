@@ -32,6 +32,10 @@ function save_options() {
 	status.innerHTML = "<br>Options saved";
 	document.body.appendChild( status );
 	setTimeout( function() { document.body.removeChild( status ) }, 2000 );
+
+	var is_options_were_changed = false;
+	// For applying changes to active tab.
+	message_options_were_changed();
 }
 
 // Restores options dialog state to saved value from localStorage.
@@ -70,13 +74,19 @@ document.getElementById( "switch_to_page_2" ).addEventListener( 'click', functio
 	switch_options_page( "page_1_button", "page_2_button" );
 	} );
 
+// helper function
+function get_active_tab() {
+	return browser.tabs.query({
+		// without this will try to do it for all tabs (even without clock (aka not loaded), i guess):
+		active: true,
+		currentWindow: true
+	});
+}
+
 let clock_visibility = document.getElementById("hide_clock_checkbox");
 set_state_of_hide_clock_checkbox();
 function set_state_of_hide_clock_checkbox() {
-	browser.tabs.query({
-		currentWindow: true,
-		active: true
-	})
+	get_active_tab()
 	.then( function( tab ) {
 		const sended_message = browser.tabs.sendMessage(
 			tab[0].id,
@@ -102,11 +112,7 @@ function set_state_of_hide_clock_checkbox() {
 clock_visibility.addEventListener( 'change', change_visibility );
 function change_visibility() {
 	// console.error( "clock_visibility.checked = ", clock_visibility.checked );
-	browser.tabs.query({
-		// without this will try to do it for all tabs (even without clock (e. g. tab is not loaded)):
-		active: true,
-		currentWindow: true
-	})
+	get_active_tab()
 	.then( send_message_to_tabs )
 	.catch( function (error) {
 		console.error( `overlay_clock change_visibility tab_query error: ${error}` );
@@ -134,6 +140,23 @@ function send_message_to_tabs( tabs ) {
 			.catch()
 		// }
 	}
+	if( is_options_were_changed == true ) {
+		is_options_were_changed = false;
+		browser.tabs.sendMessage(
+			tabs[0].id,
+			{ recreate: "true" }
+		).catch();
+	}
+}
+
+// Auto update clock's css after saving changes.
+function message_options_were_changed() {
+	is_options_were_changed = true;
+	get_active_tab()
+	.then( send_message_to_tabs )
+	.catch( function (error) {
+		console.error( `overlay_clock message_option_were_changed tab_query error: ${error}` );
+		});
 }
 
 function switch_options_page( to_hide, to_show ) {
