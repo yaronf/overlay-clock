@@ -150,7 +150,7 @@ setInterval( update_time_on_clock, 20000 );
 // load defaults values and transfer them to function create_clock()
 chrome.storage.sync.get( document.clock_defaults, create_clock );
 
-browser.runtime.onMessage.addListener( (request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
 	if( request.visibility == "show" ) {
 		overlay_clock.style.display = 'block';
 	}

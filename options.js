@@ -76,7 +76,7 @@ document.getElementById( "switch_to_page_domains_list" ).addEventListener( 'clic
 
 // helper function
 function get_active_tab() {
-	return browser.tabs.query({
+	return chrome.tabs.query({
 		// without this will try to do it for all tabs (even without clock (aka not loaded), i guess):
 		active: true,
 		currentWindow: true
@@ -88,7 +88,7 @@ set_state_of_hide_clock_checkbox();
 function set_state_of_hide_clock_checkbox() {
 	get_active_tab()
 	.then( function( tab ) {
-		const sended_message = browser.tabs.sendMessage(
+		const sended_message = chrome.tabs.sendMessage(
 			tab[0].id,
 			{ visibility: "what" }
 		)
@@ -122,7 +122,7 @@ function change_visibility() {
 function send_message_to_tabs( tabs ) {
 	if( clock_visibility.checked == false ) {
 		// for( let tab of tabs ) {
-			browser.tabs.sendMessage(
+			chrome.tabs.sendMessage(
 				// tab.id,
 				tabs[0].id,
 				{ visibility: "show" }
@@ -132,7 +132,7 @@ function send_message_to_tabs( tabs ) {
 	}
 	if( clock_visibility.checked == true ) {
 		// for( let tab of tabs ) {
-			browser.tabs.sendMessage(
+			chrome.tabs.sendMessage(
 				// tab.id,
 				tabs[0].id,
 				{ visibility: "hide" }
@@ -142,7 +142,7 @@ function send_message_to_tabs( tabs ) {
 	}
 	if( is_options_were_changed == true ) {
 		is_options_were_changed = false;
-		browser.tabs.sendMessage(
+		chrome.tabs.sendMessage(
 			tabs[0].id,
 			{ recreate: "true" }
 		).catch();
