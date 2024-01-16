@@ -33,7 +33,6 @@ function save_options() {
 	document.body.appendChild( status );
 	setTimeout( function() { document.body.removeChild( status ) }, 2000 );
 
-	var is_options_were_changed = false;
 	// For applying changes to active tab.
 	message_options_were_changed();
 }
@@ -58,6 +57,7 @@ function restore_options() {
 
 document.addEventListener( 'DOMContentLoaded', restore_options );
 document.querySelector( '#save' ).addEventListener( 'click', save_options );
+var is_options_were_changed = false;
 
 // To let function get not Window as 'this', but exactly those element, which called function.
 document.getElementById( "add_domain" ).addEventListener( 'click', function() {
