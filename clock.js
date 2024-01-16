@@ -157,17 +157,19 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
 	if( request.visibility == "hide" ) {
 		overlay_clock.style.display = 'none';
 	}
+	// chrome can't promises here
 	if( request.visibility == "what" ) {
 		if( overlay_clock.style.display == 'none' ) {
-			return Promise.resolve( { response: "hidden" } );
+			sendResponse( { response: "hidden" } );
 		}
 		if( overlay_clock.style.display == 'block' ) {
-			return Promise.resolve( { response: "shown" } );
+			sendResponse( { response: "shown" } );
 		}
 	}
 	if( request.recreate == "true" ) {
 		chrome.storage.sync.get(document.clock_defaults, create_clock);
 	}
+	return true;
 } );
 
 function check_is_page_in_domains_list( domains ) {

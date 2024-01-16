@@ -75,88 +75,101 @@ document.getElementById( "switch_to_page_domains_list" ).addEventListener( 'clic
 	} );
 
 // helper function
-function get_active_tab() {
-	return chrome.tabs.query({
+function get_active_tab( callback ) {
+	chrome.tabs.query({
 		// without this will try to do it for all tabs (even without clock (aka not loaded), i guess):
 		active: true,
 		currentWindow: true
-	});
+		}, ( tab ) => {
+			// console.log ("get_active_tab: type = " + typeof( tab ) +
+			// 	"; object keys = " + Object.keys(tab) );
+			// Using callbacks for chrome manifest v2.
+			callback( tab );
+		}
+	);
 }
 
 let clock_visibility = document.getElementById("hide_clock_checkbox");
 set_state_of_hide_clock_checkbox();
 function set_state_of_hide_clock_checkbox() {
-	get_active_tab()
-	.then( function( tab ) {
-		const sended_message = chrome.tabs.sendMessage(
-			tab[0].id,
-			{ visibility: "what" }
-		)
-		sended_message.then( ( response ) => {
-			if( response.response == "hidden" ) {
-				clock_visibility.checked = true;
-			}
-			if( response.response == "shown" ) {
-				clock_visibility.checked = false;
-			}
-		})
-		.catch( function( error ) {
-			console.error( `overlay_clock switch_checkbox send_message error: ${error}` );
-		})
+	get_active_tab( function( tab ) {
+		try {
+			// console.log ("set_state_of_hide_checkbox: tab[0] = " + tab[0] +
+				// "; keys = " + Object.keys( tab[0] ) );
+			const sended_message = chrome.tabs.sendMessage(
+				tab[0].id,
+				{ visibility: "what" },
+				function ( response ) {
+					if( response.response == "hidden" ) {
+						clock_visibility.checked = true;
+					}
+					if( response.response == "shown" ) {
+						clock_visibility.checked = false;
+					}
+				}
+			)} catch (error) {
+				console.error( `overlay_clock switch_checkbox send_message error: ${error}` );
+			  }
 	})
-	.catch( function ( error ) {
-		console.error( `overlay_clock switch_checkbox tab_query error: ${error}` );
-	});
 }
 
 clock_visibility.addEventListener( 'change', change_visibility );
 function change_visibility() {
-	// console.error( "clock_visibility.checked = ", clock_visibility.checked );
-	get_active_tab()
-	.then( send_message_to_tabs )
-	.catch( function (error) {
-		console.error( `overlay_clock change_visibility tab_query error: ${error}` );
+	// console.log( "clock_visibility.checked = ", clock_visibility.checked );
+	get_active_tab( function( tab ) {
+		send_message_to_tabs( tab );
 	});
 }
 
 function send_message_to_tabs( tabs ) {
 	if( clock_visibility.checked == false ) {
 		// for( let tab of tabs ) {
-			chrome.tabs.sendMessage(
-				// tab.id,
-				tabs[0].id,
-				{ visibility: "show" }
-			)
-			.catch()
+			try {
+				chrome.tabs.sendMessage(
+					tabs[0].id,
+					{ visibility: "show" }
+				)
+			} catch (error) {
+				console.log( "send_message_to_tabs: visibility = false: " + `${error}`);
+			}
 		// }
 	}
 	if( clock_visibility.checked == true ) {
 		// for( let tab of tabs ) {
-			chrome.tabs.sendMessage(
-				// tab.id,
-				tabs[0].id,
-				{ visibility: "hide" }
-			)
-			.catch()
+			try {
+				chrome.tabs.sendMessage(
+					tabs[0].id,
+					{ visibility: "hide" }
+				)
+			} catch (error) {
+				console.log( "send_message_to_tabs: visibility = true: " + `${error}`);
+			}
 		// }
 	}
 	if( is_options_were_changed == true ) {
 		is_options_were_changed = false;
-		chrome.tabs.sendMessage(
-			tabs[0].id,
-			{ recreate: "true" }
-		).catch();
+		try {
+			chrome.tabs.sendMessage(
+				tabs[0].id,
+				{ recreate: "true" }
+			)
+		} catch (error) {
+			console.log( "send_message_to_tabs: option_were_changed: " + `${error}`);
+		}
 	}
 }
 
 // Auto update clock's css after saving changes.
 function message_options_were_changed() {
 	is_options_were_changed = true;
-	get_active_tab()
-	.then( send_message_to_tabs )
-	.catch( function (error) {
-		console.error( `overlay_clock message_option_were_changed tab_query error: ${error}` );
-		});
+	try {
+		get_active_tab( function( tab ) {
+			send_message_to_tabs( tab );
+			});
+	} catch (error) {
+		console.error( "overlay_clock: message_option_were_changed: "
+			+ "tab_query error: " + `${error}` );
+		}
 }
 
 function switch_options_page( to_hide, to_show ) {
