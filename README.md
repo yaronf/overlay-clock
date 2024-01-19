@@ -1,9 +1,17 @@
 overlay-clock
 =============
 
-A small browser extension that displays an overlay clock.
+A small browser extension that displays an overlay digital clock at the top-right corner of the tab.
 
-Displays a digital clock on a web page. Colors and location are configurable. Click on the clock to hide it for a few seconds, hover to display date.
+Click on the clock to hide it for a few seconds, hover to display date.
+
+Features:
+
+* 24-hour or 12-hour clock
+* Clock displayed on any tab, or only when in full screen
+* Colors and fonts can be configured
+* Change on-screen location and depth (Z index)
+* Exclude from specific domains
 
 Based on the original [Overlay Clock extension](https://chrome.google.com/webstore/detail/overlay-clock/jeeaienpeegfdhhaonccddlbkenfjdbo).
 
