@@ -5,7 +5,6 @@ overlay_clock.style.borderRadius = '6px';
 overlay_clock.style.display = 'block';
 overlay_clock.style.padding = '6px';
 overlay_clock.style.position = 'fixed';
-overlay_clock.style.zIndex = '10000099';
 
 // global variable for change_clock_appearance_on_resize()
 var default_font_size_of_overlay_clock;
@@ -105,6 +104,11 @@ function create_clock( values ) {
 	my_overlay_clock_font_size = values[ 'font_size' ];
 	my_overlay_clock_style_right = values[ 'style_right' ];
 	my_overlay_clock_style_top = values[ 'style_top' ];
+	// yeah, will be only one z-index for every page, sorry
+	let my_overlay_clock_z_index = values[ 'z_index' ];
+	let my_overlay_clock_domains = values[ 'domains_array' ];
+	// console.log( "create_clock: domains[0] = " + my_overlay_clock_domains[0] );
+	check_is_page_in_domains_list( my_overlay_clock_domains );
 
 
         overlay_clock.textContent = new_time();
@@ -116,6 +120,7 @@ function create_clock( values ) {
 	overlay_clock.style.fontSize = my_overlay_clock_font_size;
 	overlay_clock.style.right = my_overlay_clock_style_right;
 	overlay_clock.style.top = my_overlay_clock_style_top;
+	overlay_clock.style.zIndex = my_overlay_clock_z_index;
 
 	// global variable for change_clock_appearance_on_resize()
 	default_font_size_of_overlay_clock = overlay_clock.style.fontSize;
@@ -123,7 +128,6 @@ function create_clock( values ) {
 	if( my_overlay_clock_full_screen_only && !is_full_screen() ) {
 			overlay_clock.style.display = 'none';
 	}
-
 }
 
 function update_time_on_clock() {
@@ -146,19 +150,44 @@ setInterval( update_time_on_clock, 20000 );
 // load defaults values and transfer them to function create_clock()
 chrome.storage.sync.get( document.clock_defaults, create_clock );
 
-browser.runtime.onMessage.addListener( (request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener( function( request, sender, sendResponse ) {
 	if( request.visibility == "show" ) {
 		overlay_clock.style.display = 'block';
 	}
 	if( request.visibility == "hide" ) {
 		overlay_clock.style.display = 'none';
 	}
+	// chrome can't promises here
 	if( request.visibility == "what" ) {
 		if( overlay_clock.style.display == 'none' ) {
-			return Promise.resolve( { response: "hidden" } );
+			sendResponse( { response: "hidden" } );
 		}
 		if( overlay_clock.style.display == 'block' ) {
-			return Promise.resolve( { response: "shown" } );
+			sendResponse( { response: "shown" } );
 		}
 	}
+	if( request.recreate == "true" ) {
+		chrome.storage.sync.get(document.clock_defaults, create_clock);
+	}
+	return true;
 } );
+
+function check_is_page_in_domains_list( domains ) {
+	// if( domains == "undefined" ) {
+	// 	console.log( "check_is_page_in_domains_list: domains are undefined" );
+	// 	return;
+	// }
+	// console.log( "check_is_page_in_domains_list: " +
+	// "doc.loc.host = " + document.location.hostname );
+	if (domains.length > 0 ) {
+		let host = document.location.hostname;
+		// yeah, no check for values
+		for( let index = 0; index < domains.length; index++ ) {
+			if( domains[ index ] == host ) {
+				// not deleting it
+				overlay_clock.style.display = 'none';
+				break;
+			}
+		}
+	}
+}
