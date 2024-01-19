@@ -21,7 +21,7 @@ body {
 	opacity: 0.8;
 }
 
-button, #add_domain, input[class="delete_domain"] {
+button, input[class="delete_domain"] {
 	color: #b0b0b0;
 	border: 0px;
 	background-color: #363636;
@@ -44,6 +44,11 @@ button {
 	/* The same size as above class */
 	padding-top: 1em;
 	top: 0%;
+}
+
+#add_domain {
+	background-color: darkgrey;
+	border: 0;
 }
 
 #bg_opacity,#font_size,#font_family,#style_right,#style_top,#z_index {
