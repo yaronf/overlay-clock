@@ -49,6 +49,10 @@ button {
 #add_domain {
 	background-color: darkgrey;
 	border: 0;
+	margin-left: 3px;
+}
+input[class="delete_domain"] {
+	margin-left: 3px;
 }
 
 #bg_opacity,#font_size,#font_family,#style_right,#style_top,#z_index {
@@ -89,12 +93,13 @@ button {
 .domains {
 	background-color: lightgrey;
 	border: 1px;
+	border-style: solid;
 	color: #000000;
 	font-family: monospace;
 	font-size: 16px;
 }
 .domain_element {
-	padding-top: 10px;
+	padding-top: 5px;
 	padding-left: 2px;
 }
 
