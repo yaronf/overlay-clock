@@ -10,7 +10,7 @@ html {
 body {
 	font-family: monospace;
 	color: #000000;
-	background: grey;
+	background: lightgrey;
 	border-radius:6px;
 	font-size: 14px;
 	padding: 0 0 0 3px;
@@ -82,7 +82,7 @@ button {
 	max-height: var( --min-page-height );
 }
 .domains {
-	background-color: darkgrey;
+	background-color: lightgrey;
 	border: 1px;
 	color: #000000;
 	font-family: monospace;
