@@ -96,7 +96,7 @@ function set_state_of_hide_clock_checkbox() {
 		try {
 			// console.log ("set_state_of_hide_checkbox: tab[0] = " + tab[0] +
 				// "; keys = " + Object.keys( tab[0] ) );
-			const sended_message = chrome.tabs.sendMessage(
+			const sent_message = chrome.tabs.sendMessage(
 				tab[0].id,
 				{ visibility: "what" },
 				function ( response ) {
