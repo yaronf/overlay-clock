@@ -1,4 +1,5 @@
 html {
+	color-scheme: light dark;
 	--min-page-width: 440px;
 	--max-page-width: 440px;
 	--min-page-height: 280px;
@@ -6,12 +7,35 @@ html {
 	min-width: var( --min-page-width );
 	max-width: var( --max-page-width );
 }
+@media (prefers-color-scheme: dark) {
+	html {
+		--main-bg-color: #000000;
+		--main-fg-color: #a0a0a0;
+		--bg-color-eye: #000090;
+		--bg-color-eye-bg: #606060;
+		--bg-color-hl: #363636;
+		--bg-color-hl-more: #464646;
+		--button-bg-color: #909090;
+	}
+}
+@media (prefers-color-scheme: light) {
+	html {
+		--main-bg-color: lightgrey;
+		--main-fg-color: black;
+		--bg-color-eye: darkblue;
+		--bg-color-eye-bg: dimgrey;
+		--bg-color-hl: darkgrey;
+		--bg-color-hl-more: grey;
+		--button-bg-color: darkgrey;
+	}
+}
+
 
 body {
+	background-color: var( --main-bg-color );
+	border-radius: 6px;
+	color: var( --main-fg-color );
 	font-family: monospace;
-	color: #000000;
-	background: lightgrey;
-	border-radius:6px;
 	font-size: 14px;
 	padding: 0 0 0 3px;
 }
@@ -22,9 +46,9 @@ body {
 }
 
 button, input[class="delete_domain"] {
-	color: #b0b0b0;
+	background-color: var( --bg-color-hl );
 	border: 0px;
-	background-color: #363636;
+	color: var( --main-fg-color );
 }
 button {
 	padding-top: 12px;
@@ -47,7 +71,7 @@ button {
 }
 
 #add_domain {
-	background-color: darkgrey;
+	background-color: var( --button-bg-color );
 	border: 0;
 	margin-left: 3px;
 }
@@ -56,16 +80,16 @@ input[class="delete_domain"] {
 }
 
 #bg_opacity,#font_size,#font_family,#style_right,#style_top,#z_index {
-	background-color: darkgrey;
+	background-color: var( --bg-color-hl );
 	border: 0;
 	border-radius: 3px;
-	color: #000000;
+	color: var( --main-fg-color );
 	font-family: 'Anonymous Pro', monospace;
 	font-size: 16px;
 }
 
 .color {
-	background-color: #292929;
+	background-color: var( --bg-color-hl );
 }
 
 /* Disable arrow buttons on the right side of input field.
@@ -91,10 +115,10 @@ input[class="delete_domain"] {
 	max-height: var( --min-page-height );
 }
 .domains {
-	background-color: lightgrey;
+	background-color: var( --main-bg-color );
 	border: 1px;
 	border-style: solid;
-	color: #000000;
+	color: var( --main-fg-color );
 	font-family: monospace;
 	font-size: 16px;
 }
@@ -134,7 +158,7 @@ input[class="delete_domain"] {
 
 #hide_clock_slider {
 	/* not the button */
-	background-color: #464646;
+	background-color: var( --bg-color-hl-more );
 	/*border-radius: 25%;*/
 	border-radius: 90%;
 	cursor: pointer;
@@ -147,7 +171,7 @@ input[class="delete_domain"] {
 }
 #hide_clock_slider:before {
 	/* this is the button */
-	background-color: #000090;
+	background-color: var( --bg-color-eye );
 	border-radius: 50%;
 	content: "";
 	bottom: -2px;
@@ -158,7 +182,7 @@ input[class="delete_domain"] {
 	transition: all .3s ease;
 }
 input[id="hide_clock_checkbox"]:checked + #hide_clock_slider {
-	background-color: #606060;
+	background-color: var( --bg-color-eye-bg );
 	left: 19px;
 	right: 21px;
 }
